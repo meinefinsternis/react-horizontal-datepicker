@@ -1,6 +1,6 @@
 {
   "name": "@meinefinsternis/react-horizontal-date-picker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "A simple component that allows the user to choose a date from a scrollable monthly view.",
   "homepage": "https://github.com/meinefinsternis/react-horizontal-datepicker",
