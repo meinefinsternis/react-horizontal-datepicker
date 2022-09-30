@@ -1,0 +1,5 @@
+dist
+.gitignore
+.prettierrc
+vite.config.js
+tsconfig.json

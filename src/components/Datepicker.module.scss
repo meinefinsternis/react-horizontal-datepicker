@@ -1,0 +1,180 @@
+.container {
+  display: flex;
+  width: 100%;
+  background: inherit;
+  padding: 20px 0;
+  justify-content: center;
+}
+
+.button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin-top: 25px;
+  background-color: transparent;
+  position: relative;
+
+  svg {
+    fill: rgb(109, 109, 109);
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: 110%;
+    width: 40px;
+    z-index: 3;
+  }
+}
+
+.buttonPrev {
+  &::after {
+    left: 24px;
+    background: linear-gradient(
+      90deg,
+      #fff,
+      hsla(0, 0%, 100%, 0.5),
+      hsla(0, 0%, 100%, 0)
+    );
+  }
+}
+
+.buttonDisabled {
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.buttonNext {
+  &::after {
+    right: 24px;
+    background: linear-gradient(
+      270deg,
+      #fff,
+      hsla(0, 0%, 100%, 0.5) 70%,
+      hsla(0, 0%, 100%, 0)
+    );
+  }
+}
+
+.dateListScrollable {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+    -webkit-appearance: none;
+  }
+}
+
+.monthContainer {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.monthLabel {
+  align-self: flex-start;
+  z-index: 3;
+  font-size: 15px;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  left: 0;
+  margin-left: 8px;
+  width: max-content;
+}
+
+.dateDayItem {
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 15px;
+  line-height: 16px;
+  user-select: none;
+  letter-spacing: 0.002em;
+  min-height: 56px;
+  min-width: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+
+  &:not(.dateDayItemSelected):hover {
+    background-color: rgba(207, 207, 207, 0.25);
+  }
+}
+
+.dateDayItemMarked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 0 0 5px;
+}
+
+.daysContainer {
+  display: flex;
+  z-index: 1;
+  margin-top: 10px;
+  font-family: sans-serif;
+}
+
+.dayLabel {
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-align: center;
+  color: rgb(119, 119, 119);
+}
+
+.dateLabel {
+  font-weight: 600;
+}
+
+.markedLabel {
+  margin-top: 10px;
+}
+
+.datesContainer {
+  display: flex;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.isWeekend {
+  color: #ff4959;
+
+  .dayLabel {
+    color: #ff4958b2;
+  }
+}
+
+.dateDayItemSelected {
+  background-color: #0050ff;
+  .dayLabel {
+    color: #fff;
+  }
+  .dateLabel {
+    background-color: #0050ff;
+    color: #fff;
+  }
+}
+
+.inRange:not(.dateDayItemSelected) {
+  background-color: #f2f2f2;
+}
+
+.dateDayItem[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.dateDayItem[aria-disabled="true"]:active {
+  pointer-events: none;
+}

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling, testing and building project before committing'
+
+npm run lint ||
+(
+    echo '[ESLint: Check Failed]'
+    false; 
+)
+npm run types ||
+(
+    echo '[TS: Check Failed]'
+    false;
+)
+npm test || 
+(
+    echo '[Jest: Check Failed]'
+    false;
+)
+echo '✅✅✅✅'
