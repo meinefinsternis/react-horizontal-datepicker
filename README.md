@@ -5,14 +5,14 @@
 The package can be installed via [npm](https://github.com/npm/cli):
 
 ```
-npm install @meinefinsternis/react-horizontal-datepicker --save
+npm install @meinefinsternis/react-horizontal-date-picker --save
 ```
 
 Below is a simple example of how to use the Datepicker in a React view.
 
 ```tsx
 import React from "react";
-import { Datepicker, DatepickerEvent} from "react-horizontal-datepicker";
+import { Datepicker, DatepickerEvent} from "@meinefinsternis/react-horizontal-date-picker";
 import { enUS } from "date-fns/locale";
 
 const Example = () => {
