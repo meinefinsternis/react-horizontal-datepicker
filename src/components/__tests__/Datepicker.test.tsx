@@ -3,15 +3,21 @@ import { enUS } from "date-fns/locale";
 import { render, screen } from "@testing-library/react";
 import { Datepicker, DatepickerProps } from "../Datepicker";
 import "@testing-library/jest-dom";
-import { differenceInDays, format, getDate } from "date-fns";
+import {
+  addDays,
+  differenceInDays,
+  format,
+  getDate,
+  startOfToday,
+} from "date-fns";
 import userEvent from "@testing-library/user-event";
 
 const toDate = (d?: string | Date) => (d ? new Date(d) : new Date());
 const getFormatDayLabel = (d: number | Date) => format(d, "EEEEE");
 const getFormatDateLabel = (d: number | Date) => String(getDate(d));
 
-const startDate = toDate("2022-10-10");
-const endDate = toDate("2022-10-20");
+const startDate = toDate(startOfToday());
+const endDate = toDate(addDays(new Date(), 10));
 
 describe("<Datepicker/>", () => {
   const createDatepicker = (
@@ -21,15 +27,15 @@ describe("<Datepicker/>", () => {
   };
 
   describe("render props", () => {
-    const startValue = toDate("2022-10-15");
-    const endValue = toDate("2022-10-17");
+    const startValue = toDate(startOfToday());
+    const endValue = toDate(addDays(startOfToday(), 10));
     const disabledDates = [
-      toDate("2022-10-12"),
-      toDate("2022-10-15"),
-      toDate("2022-10-20"),
+      toDate(addDays(startOfToday(), 1)),
+      toDate(addDays(startOfToday(), 2)),
+      toDate(addDays(startOfToday(), 3)),
     ];
     it("should render start date", () => {
-      const startDate = toDate("2022-10-10");
+      const startDate = toDate(startOfToday());
       createDatepicker({
         startValue: null,
         endValue: null,
@@ -77,6 +83,7 @@ describe("<Datepicker/>", () => {
       });
 
       const selectedDays = container.querySelectorAll(".dateDayItemSelected");
+
       const dayLabel = selectedDays[0].firstElementChild;
       const dateLabel = selectedDays[0].lastElementChild;
       expect(selectedDays).toHaveLength(1);
@@ -135,7 +142,7 @@ describe("<Datepicker/>", () => {
 
   describe("<Datepicker/> events", () => {
     test("endValue onClick", async () => {
-      let startValue: Date | null = toDate("2022-10-15");
+      let startValue: Date | null = toDate(addDays(startOfToday(), 1));
       let endValue: Date | null = null;
       const onChange = jest.fn((dates) => {
         [startValue, endValue] = dates;
